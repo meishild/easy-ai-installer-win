@@ -173,14 +173,15 @@ def main():
                       f"training on high end 30X0 and 40X0 cards? (y/n): ").casefold()
 
     if reply == 'y':
-        if not os.path.exists("cudnn.zip"):
+        cndnn_zip_path = os.path.join(this_path, "cudnn.zip")
+        if not os.path.exists(cndnn_zip_path):
             print("start download cudnn.zip file.")
             r = requests.get("https://b1.thefileditch.ch/mwxKTEtelILoIbMbruuM.zip")
-            with open("cudnn.zip", 'wb') as f:
+            with open(cndnn_zip_path, 'wb') as f:
                 f.write(r.content)
             print("finish download cudnn.zip file.")
 
-        shutil.copy(os.path.join(this_path, "cudnn.zip"), floder_path)
+        shutil.copy(cndnn_zip_path, floder_path)
         shutil.copy(os.path.join(this_path, "cudnn.py"), floder_path)
         with ZipFile("cudnn.zip", 'r') as f:
             f.extractall(path="cudnn_windows")
